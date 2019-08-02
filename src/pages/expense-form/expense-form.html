@@ -1,0 +1,79 @@
+<!--
+  Generated template for the ExpenseFormPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header text-center>
+  <ion-navbar>
+    <button ion-button menuToggle icon-only>
+      <ion-icon name='menu'></ion-icon>
+    </button>
+    <ion-title>expenseForm</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+<div text-center>
+  <form [formGroup]='expenseForm' (ngSubmit)='onSubmit(expenseForm.value)'>
+      <ion-item>
+          <ion-label stacked>Expense name</ion-label>
+          <ion-input type='text' formControlName='expenseName'></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Category</ion-label>
+        <ion-select formControlName="category">
+          <ion-option value="Food">Food</ion-option>
+          <ion-option value="Travel">Travel</ion-option>
+          <ion-option value="Appearl">Appearl</ion-option>
+          <ion-option value="Electronics">Electronics</ion-option>
+          <ion-option value="Grocery">Grocery</ion-option>
+        </ion-select>
+    </ion-item>
+      <ion-item>
+          <ion-label stacked>Cost</ion-label>
+          <ion-input type='number' formControlName='expenseCost'></ion-input>
+      </ion-item>
+      <ion-item *ngIf="expenseForm.controls['expenseCost'].hasError('max') && expenseForm.controls['expenseCost'].touched">
+          <p>You can not spend more than {{pocket}}</p>
+      </ion-item>
+      <ion-item>
+          <ion-label>Recurring expense</ion-label>
+          <ion-checkbox color="primary" checked="false" formControlName="expenseType"></ion-checkbox>
+      </ion-item>
+
+      <ion-item *ngIf="expenseForm.controls['expenseType'].value==true">
+          <ion-label>Period</ion-label>
+          <ion-select formControlName="expensePeriod">
+            <ion-option value="Monthly">Monthly</ion-option>
+            <ion-option value="Quaterly">Quaterly</ion-option>
+            <ion-option value="Annual">Annual</ion-option>
+          </ion-select>
+      </ion-item>
+
+      <ion-item>
+            <ion-label>Date</ion-label>
+            <ion-datetime displayFormat="DD-MM-YYYY" formControlName="expenseDate" [(ngModel)]="now"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Time</ion-label>
+          <ion-datetime displayFormat="HH:mm" formControlName="expenseTime" [(ngModel)]="now"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+          <ion-label>Tag location with this expense</ion-label>
+          <ion-checkbox color="primary" checked="false" formControlName="tagLocation"></ion-checkbox>
+      </ion-item>
+      <ion-item *ngIf="expenseForm.controls['tagLocation'].value==true">
+        <ion-label>yourCurrentLocation</ion-label>
+      </ion-item>
+      <button ion-button full color='primary' [disabled]="!expenseForm.valid" type='submit'>Add expense</button>
+
+  </form>
+
+</div>
+</ion-content>
+
+<ion-footer>
+</ion-footer>

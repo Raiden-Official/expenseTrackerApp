@@ -1,0 +1,37 @@
+<!--
+  Generated template for the ExpenseListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header text-center>
+  <ion-navbar>
+    <ion-title>expenseList</ion-title>
+    <button ion-button icon-only menuToggle>
+        <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div  id="container" style="display: block;"></div>
+  <div *ngIf="currentUserExpenseList.length == 0" text-center>
+    There are no expenses to show right now.
+  </div>
+  <div *ngFor='let expense of currentUserExpenseList ; index as i'>
+      <ion-list>
+          <ion-list-header *ngIf='i==0 || expense.date != currentUserExpenseList[i-1].date'>
+            {{expense.date}}
+          </ion-list-header>
+          <ion-item>
+            <h1>{{expense.name}}</h1>
+            <h2>Amount: {{expense.cost}}$</h2>
+            <p>Location: {{expense.location}}, Recurring: {{expense.type}}</p>
+            <p>Details: {{expense.details}}</p>
+            <p>Category: {{expense.category}}</p>
+          </ion-item>
+      </ion-list>
+  </div>
+
+
+</ion-content>

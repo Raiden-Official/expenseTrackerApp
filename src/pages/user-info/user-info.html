@@ -1,0 +1,47 @@
+<!--
+  Generated template for the UserInfoPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-title text-center>userInfo</ion-title>
+        <button ion-button icon-only menuToggle start>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+      </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div class='container'>
+    <form [formGroup]="userInfoForm" (ngSubmit)='addUserData(userInfoForm.value)'>
+        <ion-item no-padding>
+            <ion-label floating>Name</ion-label>
+            <ion-input formControlName="userName" type="text"></ion-input>
+        </ion-item>
+        <ion-item no-padding *ngIf="userInfoForm.controls['userName'].hasError('required') && userInfoForm.controls['userName'].touched">
+          <p>Name is required.</p>
+        </ion-item>
+        <ion-item no-padding>
+            <ion-label floating>Salary</ion-label>
+            <ion-input type='number' formControlName='userSalary'></ion-input>
+        </ion-item>
+        <ion-item no-padding *ngIf="userInfoForm.controls['userSalary'].hasError('required') && userInfoForm.controls['userSalary'].touched">
+          <p>Salary is required.</p>
+        </ion-item>
+        <ion-item no-padding>
+            <ion-label>Fixed month budget</ion-label>
+            <ion-checkbox color="primary" checked="false" formControlName="isUserSalaryFix"></ion-checkbox>
+        </ion-item>
+        <ion-item no-padding *ngIf="userInfoForm.controls['isUserSalaryFix'].hasError('required') && userInfoForm.controls['isUserSalaryFix'].touched">
+          <p>Salary type is required.</p>
+        </ion-item>
+        <ion-item no-padding>
+            <ion-label floating>Savings percentage</ion-label>
+            <ion-input type='number' formControlName='userSavings'></ion-input>
+        </ion-item>
+        <div text-center><button ion-button full color="primary" [disabled]="!userInfoForm.valid" type="submit">Update info</button></div>
+    </form>
+  </div>
+</ion-content>
